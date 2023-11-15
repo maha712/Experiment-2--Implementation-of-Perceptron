@@ -34,15 +34,25 @@ Indeed if the neuron output is exactly zero it cannot be assumed that the sample
 ALGORITHM:
 
 Importing the libraries
+
 Importing the dataset
+
 Plot the data to verify the linear separable dataset and consider only two classes
+
 Convert the data set to scale the data to uniform range by using Feature scaling
+
 Split the dataset for training and testing
+
 Define the input vector ‘X’ from the training dataset
+
 Define the desired output vector ‘Y’ scaled to +1 or -1 for two classes C1 and C2
+
 Assign Initial Weight vector ‘W’ as 0 as the dimension of ‘X’
+
 Assign the learning rate
+
 For ‘N ‘ iterations ,do the following:
+
 v(i) = w(i)*x(i)
           W (i+i)= W(i) + learning_rate*(y(i)-t(i))*x(i)
         
@@ -51,37 +61,60 @@ Plot the error for each iteration
 Print the accuracy
 
 
- PROGRAM:
+PROGRAM:
 
 DEVELOPED BY: MAHALAKSHMI.K
+
 REF NO : 212222240057
 
 import numpy as np
+
 import pandas as pd
+
 import matplotlib.pyplot as plt
+
 from mpl_toolkits import mplot3d
+
 from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import accuracy_score
 
 class Perceptron:
+
 def __init__(self, learning_rate=0.1):
+  
   self.learning_rate = learning_rate
+  
   self._b = 0.0  # y-intercept
+  
   self._w = None  # weights assigned to input features
+  
   self.misclassified_samples = []
+
 def fit(self, x: np.array, y: np.array, n_iter=10):
+  
   self._b = 0.0
+  
   self._w = np.zeros(x.shape[1])
+  
   self.misclassified_samples = []
+  
   for _ in range(n_iter):
-    # counter of the errors during this training iteration
+   
     errors = 0
+    
     for xi, yi in zip(x, y):
+      
       update = self.learning_rate * (yi - self.predict(xi))
+      
       self._b += update
+      
       self._w += update * xi
+      
       errors += int(update != 0.0)
+    
     self.misclassified_samples.append(errors)
+
 def f(self, x: np.array) -> float:
   return np.dot(x, self._w) + self._b
 def predict(self, x: np.array):
