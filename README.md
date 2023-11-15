@@ -3,12 +3,12 @@
 
 To implement a perceptron for classification using Python
 
-EQUIPMENTS REQUIRED:
+#EQUIPMENTS REQUIRED:
 
 Hardware – PCs
 Anaconda – Python 3.7 Installation / Google Colab /Jupiter Notebook
 
-RELATED THEORETICAL CONCEPT:
+#RELATED THEORETICAL CONCEPT:
 
 A Perceptron is a basic learning algorithm invented in 1959 by Frank Rosenblatt. It is meant to mimic the working logic of a biological neuron. The human brain is basically a collection of many interconnected neurons. Each one receives a set of inputs, applies some sort of computation on them and propagates the result to other neurons.
 
@@ -31,7 +31,7 @@ A threshold function, usually Heaviside or sign functions, maps the scalar value
 Indeed if the neuron output is exactly zero it cannot be assumed that the sample belongs to the first sample since it lies on the boundary between the two classes. Nonetheless for the sake of simplicity,ignore this situation.
 
 
-ALGORITHM:
+#ALGORITHM:
 
 Importing the libraries
 
@@ -61,7 +61,7 @@ Plot the error for each iteration
 Print the accuracy
 
 
-PROGRAM:
+#PROGRAM:
 
 DEVELOPED BY: MAHALAKSHMI.K
 
@@ -116,10 +116,15 @@ def fit(self, x: np.array, y: np.array, n_iter=10):
     self.misclassified_samples.append(errors)
 
 def f(self, x: np.array) -> float:
+
   return np.dot(x, self._w) + self._b
+  
 def predict(self, x: np.array):
+
   return np.where(self.f(x) >= 0, 1, -1)
+  
 df = pd.read_csv('/content/IRIS.csv')
+
 df.head()
 
 y = df.iloc[:, 4].values
@@ -127,14 +132,18 @@ y = df.iloc[:, 4].values
 x = df.iloc[:, 0:3].values
 
 x = x[0:100, 0:2]  # reduce the dimensionality of the data
+
 y = y[0:100]
+
 plt.scatter(x[:50, 0], x[:50, 1], color='red', marker='o', label='Setosa')
 
-plt.scatter(x[50:100, 0], x[50:100, 1], color='blue', marker='x',
-          label='Versicolour')
+plt.scatter(x[50:100, 0], x[50:100, 1], color='blue', marker='x', label='Versicolour')
+         
 
 plt.xlabel("Sepal length")
+
 plt.ylabel("Petal length")
+
 plt.legend(loc='upper left')
 
 plt.show()
@@ -143,6 +152,7 @@ y = np.where(y == 'Iris-setosa', 1, -1)
 
 
 x[:, 0] = (x[:, 0] - x[:, 0].mean()) / x[:, 0].std()
+
 x[:, 1] = (x[:, 1] - x[:, 1].mean()) / x[:, 1].std()
 
 
@@ -150,21 +160,26 @@ x[:, 1] = (x[:, 1] - x[:, 1].mean()) / x[:, 1].std()
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25,random_state=0)
 
 classifier = Perceptron(learning_rate=0.01)
+
 classifier.fit(x_train, y_train)
+
 print("accuracy" , accuracy_score(classifier.predict(x_test), y_test)*100)
 
 plt.plot(range(1, len(classifier.misclassified_samples) + 1),classifier.misclassified_samples, marker='o')
+
 plt.xlabel('Epoch')
+
 plt.ylabel('Errors')
+
 plt.show()
 
-OUTPUT:
+#OUTPUT:
 
  ![N1](https://github.com/maha712/Experiment-2--Implementation-of-Perceptron/assets/121156360/cd550409-b68f-4614-b1fe-b4fd732cfe63)
 
 ![N2](https://github.com/maha712/Experiment-2--Implementation-of-Perceptron/assets/121156360/9c4859b1-ad71-4a17-8953-a7de95db4f00)
 
-RESULT:
+#RESULT:
 
 Thus ,a perceptron for classification using Python is executed successfully.
 
